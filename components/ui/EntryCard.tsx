@@ -1,8 +1,6 @@
 import { DragEvent, FC, useContext } from 'react';
 import { UIContext } from '../../context/ui/UIContext';
 import { Entry } from '../../interfaces';
-
-
 interface Props {
     entry: Entry;
 }

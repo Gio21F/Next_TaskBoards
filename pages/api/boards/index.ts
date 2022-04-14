@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type {NextApiResponse, NextApiRequest} from 'next'
 import { db } from '../../../database';
 import { IBoard, Board } from '../../../models';
 

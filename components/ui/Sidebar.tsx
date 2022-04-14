@@ -1,8 +1,3 @@
-import { Drawer, Box, Typography, List, 
-    ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material'
-
-import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
-import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import { useContext } from 'react';
 import { UIContext } from '../../context/ui';
 

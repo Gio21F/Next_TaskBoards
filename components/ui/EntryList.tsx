@@ -3,7 +3,7 @@ import { FC, useContext, useMemo, DragEvent } from 'react';
 import { EntriesContext } from '../../context/entries';
 import { UIContext } from '../../context/ui';
 
-import { EntryStatus } from '../../interfaces';
+import { Entry, EntryStatus } from '../../interfaces';
 import { EntryCard } from './';
 
 interface Props {

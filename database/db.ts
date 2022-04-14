@@ -25,7 +25,7 @@ export const connect = async() => {
         await mongoose.disconnect()
     }
 
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/jiira')
+    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/taskboard')
     mongoConnection.isConnected = 1;
     console.log("Conectado a Mongo")
 }
