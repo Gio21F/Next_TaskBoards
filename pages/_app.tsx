@@ -2,14 +2,31 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { UIProvider } from '../context/ui'
 import { EntriesProvider } from '../context/entries'
-  
-function MyApp({ Component, pageProps }: AppProps) {
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from '../context/auth';
+import { SessionProvider } from 'next-auth/react';
+import NextNProgress from 'nextjs-progressbar';
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <EntriesProvider>
-      <UIProvider>
-          <Component {...pageProps} />
-      </UIProvider>
-    </EntriesProvider>
+    <SessionProvider session={session}>
+      <AuthProvider>
+        {/* <EntriesProvider> */}
+          <UIProvider>
+            <NextNProgress
+                color="#3A64D8"
+                startPosition={0.3}
+                stopDelayMs={200}
+                height={4}
+                showOnShallow={true}
+              />
+              <Component {...pageProps} />
+              <ToastContainer />
+          </UIProvider>
+        {/* </EntriesProvider> */}
+      </AuthProvider>
+    </SessionProvider>
   )
 }
 

@@ -1,40 +1,56 @@
 import { FC, useReducer, useEffect } from 'react';
-import { entriesApi } from '../../apis';
-import { Entry } from '../../interfaces';
+import { tasksApi } from '../../api';
+import { IEntry } from '../../interfaces';
+import { toast } from 'react-toastify';
 
 import { EntriesContext, entriesReducer } from './';
 
 export interface EntriesState {
-    entries: Entry[];
+    entries: IEntry[];
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
     entries: []
 }
 
-export const EntriesProvider:FC = ({ children }) => {
+const optionsToast: any= {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+}
 
+export const EntriesProvider:FC = ({ children }) => {
     const [state, dispatch] = useReducer( entriesReducer , Entries_INITIAL_STATE );
 
     const addNewEntry = async( description: string ) => {
-        const { data } = await entriesApi.post<Entry>('/entries', {
+        const { data } = await tasksApi.post<IEntry>('/entries', {
             description
         })
         dispatch({ type: '[Entry] Entry-add', payload: data });
     }
 
-    const updateEntry = async( { _id, description, status }: Entry   ) => {
-        try {
-            const { data } = await entriesApi.put<Entry>(`/entries/${_id}`, { description, status });
-            dispatch({ type: '[Entry] Entry-Updated', payload: data });
+    const toastSuccess = ( message: string ) =>
+        toast.success(message, optionsToast); 
+    
+    const toastError = ( message: string ) =>
+        toast.error(message, optionsToast); 
 
+    const updateEntry = async( { _id, description, status }: IEntry, showSnackbar = false) => {
+        try {
+            const { data } = await tasksApi.put<IEntry>(`/entries/${_id}`, { description, status });
+            dispatch({ type: '[Entry] Entry-Updated', payload: data });
+            if ( showSnackbar ) toastSuccess('Update Successfully!') 
         } catch (error) {
-            console.log(error);
+            toastError("Update Failed!")
         }
     }
 
     const refreshEntries = async() => {
-        const { data } =  await entriesApi.get<Entry[]>('/entries')    
+        const { data } =  await tasksApi.get<IEntry[]>('/entries')    
         dispatch({ type: '[Entry] Entries-Loaded', payload: data });
     }
 

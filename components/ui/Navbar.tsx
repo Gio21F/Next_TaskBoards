@@ -1,18 +1,29 @@
 import { useContext } from 'react';
 import { UIContext } from '../../context/ui';
+import NextLink from 'next/link';
+import { BiMenu, BiLogOut } from 'react-icons/bi'
+import { signOut } from 'next-auth/react';
 
 export const Navbar = () => {
   const { openSideMenu } = useContext( UIContext );
   return (
-    <div className='w-full flex items-center h-10 p-6 shadow-md shadow-[#76CB1A]'>
-      <div className='flex space-x-2'>
+    <div className='flex items-center justify-between h-16 p-6 shadow-md shadow-indigo-500'>
+      <div className='flex space-x-2 items-center'>
         <button 
           onClick={ openSideMenu }
-          className='w-10 rounded-full flex items-center justify-center bg-green-400'>
-          O
+          className='flex items-center justify-center'>
+          <BiMenu className='w-10 h-10 text-white' />
         </button>
-        <p className='font-bold text-lg'>OpenJira</p>
+        <NextLink href='/dasboard' passHref>
+          <p className='font-bold text-lg'>TasksBoards</p>
+        </NextLink>
       </div>
+
+      <button 
+        onClick={ () => signOut() }
+        className='w-full flex items-center place-content-end justify-end'>
+        <BiLogOut className='w-10 h-10 text-white' />
+      </button>
     </div>
   )
 }

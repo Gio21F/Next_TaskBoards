@@ -1,3 +1,4 @@
-export { default as Entry, type IEntry } from './Entry'
-export { default as Board, type IBoard } from './Board'
-export { default as List, type IList } from './List'
+export { default as Entry } from './Entry'
+export { default as Board } from './Board'
+export { default as List } from './List'
+export { default as User } from './User'

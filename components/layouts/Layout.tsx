@@ -9,12 +9,12 @@ interface Props {
 
 export const Layout: FC<Props> = ({ title = 'OpenJira', children }) => {
   return (
-    <div className='w-full h-screen bg-black text-white'>
+    <div className='w-full h-screen bg-gray-900 text-white'>
       <Head>
         <title>{title}</title>
       </Head>
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className='py-5 px-8'>
         { children }
       </div>

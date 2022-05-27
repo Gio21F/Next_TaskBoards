@@ -1,8 +1,9 @@
-import { Entry } from "."
+import { IEntry } from "."
 
-export interface List {
-    _id: string;
+export interface IList {
+    _id?: string;
     title: string;
-    createdAt: number;
-    entries: Entry[];
+    entries: IEntry[];
+    createdAt?: string;
+    updatedAt?: string;
 }

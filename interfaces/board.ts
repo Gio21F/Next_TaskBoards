@@ -1,13 +1,9 @@
-import { List } from "./"
+import { IList } from "./"
 
-export interface Boards {
-    _id: string;
-    boards: Board[];
-}
-
-export interface Board {
-    _id: string;
+export interface IBoard {
+    _id?: string;
     title: string;
-    createdAt: number;
-    list: List[];
+    list: IList[];
+    createdAt?: string;
+    updatedAt?: string;
 }

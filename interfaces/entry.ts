@@ -1,8 +1,8 @@
-export interface Entry {
-    _id: string;
+export interface IEntry {
+    _id?: string;
+    title: string;
     description: string;
-    createdAt: number;
-    status: EntryStatus;
+    status: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
-
-export type EntryStatus = 'pending' | 'in-progress' | 'finished';
