@@ -14,12 +14,12 @@ interface Props {
 }
 export interface AuthState {
     isLoggedIn: boolean;
-    user?: IUser;
+    user: IUser | null;
 }
 
 const AUTH_INITIAL_STATE: AuthState = {
     isLoggedIn: false,
-    user: undefined,
+    user: null,
 }
 
 export const AuthProvider:FC<Props> = ({ children }) => {

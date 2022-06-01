@@ -3,10 +3,9 @@ import { IBoard } from '../interfaces';
 
 const boardSchema = new Schema({
     title: { type: String, required: true },
-    list: [{
-        type: Schema.Types.ObjectId,
-        ref: 'List',
-    }]
+    description: { type: String },
+    image: { type: String },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true,
 });

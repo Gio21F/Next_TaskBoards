@@ -1,6 +1,9 @@
 import type {NextApiResponse, NextApiRequest} from 'next'
-import { db } from '../../../database';
-import { IBoard, Board } from '../../../models';
+import { db } from '../../../../database';
+import { IBoard } from '../../../../interfaces';
+import { Board } from '../../../../models';
+import { isValidObjectId } from 'mongoose';
+
 
 type Data = 
     | { message: string }
@@ -11,22 +14,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
     switch ( req.method ) {
         case 'GET':
-            return getBoards( res );
+            return getBoards( res, req );
 
         case 'POST':
-            return postBoard( req, res );
+            return postBoard( res, req );
             
         default:
             return res.status(400).json({ message: 'Endpoint not found' });
     }
 }
 
-const getBoards = async( res: NextApiResponse<Data> ) => {
+const getBoards = async( res: NextApiResponse<Data>, req: NextApiRequest ) => {
+    const { user = '' } = req.query;
     try {
         await db.connect();
-        const boards = await Board.find().sort({ createdAt: 'ascending' });
+        const boards = await Board.find({user}).sort({ createdAt: 'ascending' });
         await db.disconnect();
-    
         return res.status(200).json( boards );
     } catch (error) {
         await db.disconnect();
@@ -35,16 +38,23 @@ const getBoards = async( res: NextApiResponse<Data> ) => {
     }
 }
 
-const postBoard = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
+const postBoard = async( res: NextApiResponse<Data>, req: NextApiRequest ) => {
+    const { user = '' } = req.query;
+    
     const { title = '' } = req.body;
+
+    if ( !isValidObjectId(user) ) return res.status(400).json({ message: 'Invalid user id' });
+    if ( !title ) return res.status(400).json({ message: 'Title is required' });
 
     const newBoard = new Board({
         title,
-        createdAt: Date.now(),
+        user,
     });
 
     try {
         await db.connect();
+        const boards = await Board.find({user}).count();
+        if ( boards >= 10 ) return res.status(400).json({ message: 'You can only have 10 boards' });
         await newBoard.save();
         await db.disconnect();
 

@@ -7,13 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from '../context/auth';
 import { SessionProvider } from 'next-auth/react';
 import NextNProgress from 'nextjs-progressbar';
+import { BoardsProvider } from '../context/boards';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <AuthProvider>
-        {/* <EntriesProvider> */}
-          <UIProvider>
+        <UIProvider>
+          <BoardsProvider>
             <NextNProgress
                 color="#3A64D8"
                 startPosition={0.3}
@@ -22,9 +23,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
                 showOnShallow={true}
               />
               <Component {...pageProps} />
-              <ToastContainer />
-          </UIProvider>
-        {/* </EntriesProvider> */}
+            <ToastContainer />
+          </BoardsProvider>
+        </UIProvider>
       </AuthProvider>
     </SessionProvider>
   )

@@ -1,9 +1,9 @@
-import { IList } from "./"
-
 export interface IBoard {
     _id?: string;
     title: string;
-    list: IList[];
+    description: string;
+    image: string;
+    user: string;
     createdAt?: string;
     updatedAt?: string;
 }

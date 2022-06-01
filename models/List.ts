@@ -4,10 +4,13 @@ import { IList } from '../interfaces';
 
 const listSchema = new Schema({
     title: { type: String, required: true },
-    entries: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Entry',
-    }]
+    descrption: { type: String },
+    board: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Board', 
+        required: true 
+    },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true,
 });

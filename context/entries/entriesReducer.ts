@@ -1,12 +1,12 @@
 import { EntriesState } from './';
-import { Entry } from '../../interfaces';
+import { IEntry } from '../../interfaces';
 
 
 type EntriesActionType = 
-   | { type: '[Entry] Entry-add', payload: Entry  } 
-   | { type: '[Entry] Entry-Updated', payload: Entry  } 
-   | { type: '[Entry] Entry-Deleted', payload: Entry  }
-   | { type: '[Entry] Entries-Loaded', payload: Entry[]  }
+   | { type: '[Entry] Entry-add', payload: IEntry  } 
+   | { type: '[Entry] Entry-Updated', payload: IEntry  } 
+   | { type: '[Entry] Entry-Deleted', payload: IEntry  }
+   | { type: '[Entry] Entries-Loaded', payload: IEntry[]  }
 
 
 export const entriesReducer = ( state: EntriesState, action: EntriesActionType ): EntriesState => {

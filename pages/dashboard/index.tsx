@@ -1,25 +1,33 @@
-import React from 'react'
-import { signOut } from 'next-auth/react';
+import { GetServerSideProps } from 'next'
 import { Layout } from '../../components/layouts';
+import { ContainerBoards } from '../../components/Boards';
+import { getSession } from 'next-auth/react';
+import { IBoard } from '../../interfaces';
 
 const PageDashboard = () => {
   return (
     <Layout title='Dashboard'>
-      <h1 className='text-3xl font-bold'> Tableros </h1>
-      <div className='w-full flex flex-wrap gap-y-2 place-content-center h-auto mt-5 '>
-        <button className='btn-board'>
-          <p className='px-2 truncate font-semibold text-lg'> Tablero 1 </p>
-        </button>
-        <div className='btn-board'>
-          <p className='px-2 truncate'> Tablero 1 </p>
-        </div>
-        <div className='btn-board'>
-          <p className='px-2 truncate'> Tablero 1 </p>
-        </div>
-        
-      </div>
+      <ContainerBoards />
     </Layout>
   )
 }
 
 export default PageDashboard
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  const session: any = await getSession({ req });
+  if ( !session ) {
+      return {
+          redirect: {
+              destination: '/auth/login',
+              permanent: false,
+          }
+      }
+  }
+
+
+  return { props: {} }
+}

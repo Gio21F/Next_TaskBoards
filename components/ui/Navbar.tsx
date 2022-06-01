@@ -14,8 +14,8 @@ export const Navbar = () => {
           className='flex items-center justify-center'>
           <BiMenu className='w-10 h-10 text-white' />
         </button>
-        <NextLink href='/dasboard' passHref>
-          <p className='font-bold text-lg'>TasksBoards</p>
+        <NextLink href='/dashboard' passHref>
+          <p className='font-bold text-lg cursor-pointer'>TasksBoards</p>
         </NextLink>
       </div>
 
