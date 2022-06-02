@@ -1,4 +1,3 @@
-import { IEntry } from "."
 
 export interface IList {
     _id?: string;

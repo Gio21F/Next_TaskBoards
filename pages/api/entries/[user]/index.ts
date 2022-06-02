@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { db } from '../../../database';
-import { Entry, IEntry } from '../../../models';
+import { isValidObjectId } from 'mongoose';
+import { db } from '../../../../database';
+import { IEntry } from '../../../../interfaces';
+import { Entry } from '../../../../models';
+
 
 type Data = 
     | { message: string }
@@ -11,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     
     switch ( req.method ) {
         case 'GET':
-            return getEntries( res );
+            return getEntries( req, res );
 
         case 'POST':
             return postEntry( req, res );
@@ -22,10 +25,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 }
 
 
-const getEntries = async( res: NextApiResponse<Data> ) => {
+const getEntries = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
+    const { user = '' } = req.query;
+
     try {
         await db.connect();
-        const entries = await Entry.find().sort({ createdAt: 'ascending' });
+        const entries = await Entry.find({user}).sort({ createdAt: 'ascending' });
         await db.disconnect();
     
         return res.status(200).json( entries );
@@ -38,15 +43,23 @@ const getEntries = async( res: NextApiResponse<Data> ) => {
 
 
 const postEntry = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
-    const { description = '' } = req.body;
+    const { title = '', list = '' } = req.body;
+    const { user = '' } = req.query;
+
+    if ( !isValidObjectId(user) ) return res.status(400).json({ message: 'Invalid user id' });
+    if ( !isValidObjectId(list) ) return res.status(400).json({ message: 'Invalid list id' });
+    if ( !title ) return res.status(400).json({ message: 'Title is required' });
 
     const newEntry = new Entry({
-        description,
-        createdAt: Date.now(),
+        title,
+        user,
+        list,
     });
 
     try {
         await db.connect();
+        const entries = await Entry.find({user}).count();
+        if ( entries >= 10 ) return res.status(400).json({ message: 'Solo puedes tener 10 tareas por lista' });
         await newEntry.save();
         await db.disconnect();
 

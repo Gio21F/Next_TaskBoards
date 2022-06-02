@@ -1,9 +1,9 @@
-import { IBoard, IEntry, IUser } from "../interfaces";
+import { IBoard, IList, IUser } from "../interfaces";
 
 interface SeedData {
     users: IUser[]
     boards?: IBoard[]
-    entries?: IEntry[]
+    entries?: IList[]
 }
 
 export const seedData: SeedData = {

@@ -4,7 +4,6 @@ import { IEntry } from '../interfaces';
 const entrySchema = new Schema({
     title: { type: String, required: true },
     description: { type: String },
-    color: { type: String },
     list: {
         type: Schema.Types.ObjectId,
         ref: 'List',

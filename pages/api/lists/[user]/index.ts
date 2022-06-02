@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../../../database';
 import { IList } from '../../../../interfaces';
 import { List } from '../../../../models';
+import { isValidObjectId } from 'mongoose';
 
 type Data = 
     | { message: string }
@@ -42,6 +43,9 @@ const getLists = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
 const postList = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     const { user = '' } = req.query;
     const { title = '', board = '' } = req.body;
+
+    if ( !isValidObjectId(user) ) return res.status(400).json({ message: 'Invalid user id' });
+    if ( !isValidObjectId(board) ) return res.status(400).json({ message: 'Invalid board id' });
 
     const newList= new List({
         title,
