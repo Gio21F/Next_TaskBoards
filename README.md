@@ -1,5 +1,5 @@
 
-# Next.js OpenJira - Tasks App Docker
+# Next.js TasksBoards - Tasks App Docker
 ```
 docker-compose up -d
 ```
