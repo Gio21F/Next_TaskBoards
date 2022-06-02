@@ -11,8 +11,7 @@ const listSchema = new Schema({
         required: true 
     },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-}, {
-    timestamps: true,
+    createdAt: { type: Number, default: Date.now },
 });
 
 const ListModel: Model<IList> = mongoose.models.List || mongoose.model('List', listSchema);

@@ -27,7 +27,7 @@ const BoardPage = () => {
             if (hasError) {
                 toast.error(message, optionsToast)
             } else {
-                toast.success('El tablero se creo correctamente', optionsToast)
+                toast.success('La lista se creo correctamente', optionsToast)
             }
             return reset()
         }

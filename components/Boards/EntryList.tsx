@@ -13,8 +13,8 @@ export const EntryList = ({ status }:Props) => {
     const { isDragging, endDragging } = useContext( UIContext );
     const { entries, updateEntry } = useContext( BoardsContext );
 
-    const entriesByStatus = useMemo( () => entries.filter( entry => entry.list === status ), [ entries, status ] );
-
+    const entriesByStatus = useMemo( () => entries.filter( entry => entry.list === status ), [ entries, status ] ).reverse();
+    
     const allowDrop = ( event: DragEvent<HTMLDivElement> ) => {
         event.preventDefault();
     }
@@ -38,7 +38,7 @@ export const EntryList = ({ status }:Props) => {
             onDragOver={ allowDrop }
             className={ isDragging ? 'bg-zinc-700/30' : '' }
         >
-            <div style={{ height: 'calc( 100vh - 350px )', maxWidth: 280 }} className='overflow-y-scroll scrollbar-hide'>
+            <div style={{ height: 'calc( 100vh - 350px )', maxWidth: 280 }} className='mt-2 overflow-y-scroll scrollbar-hide'>
                 <div
                     className='space-y-2'
                     style={{

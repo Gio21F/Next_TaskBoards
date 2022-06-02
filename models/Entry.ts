@@ -10,8 +10,7 @@ const entrySchema = new Schema({
         required: true
     },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-}, {
-    timestamps: true,
+    createdAt: { type: Number, default: Date.now },
 });
 
 const EntryModel: Model<IEntry> = mongoose.models.Entry || mongoose.model('Entry', entrySchema);

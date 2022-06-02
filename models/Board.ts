@@ -6,8 +6,7 @@ const boardSchema = new Schema({
     description: { type: String },
     image: { type: String },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-}, {
-    timestamps: true,
+    createdAt: { type: Number, default: Date.now },
 });
 
 const BoardModel: Model<IBoard> = mongoose.models.Board || mongoose.model('Board', boardSchema);

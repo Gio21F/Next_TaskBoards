@@ -4,6 +4,6 @@ export interface IEntry {
     description: string;
     list: string;
     user: string;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt?: number;
+    // updatedAt?: string;
 }

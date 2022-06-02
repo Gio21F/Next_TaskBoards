@@ -26,7 +26,7 @@ export const ContainerBoards = () => {
     if (hasError) {
       toast.error(message, optionsToast)
     } else {
-      toast.success('La lista se creo correctamente', optionsToast)
+      toast.success('El tablero se creo correctamente', optionsToast)
     }
     reset()
   }

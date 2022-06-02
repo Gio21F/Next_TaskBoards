@@ -4,6 +4,6 @@ export interface IBoard {
     description: string;
     image: string;
     user: string;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt?: number;
+    // updatedAt?: string;
 }

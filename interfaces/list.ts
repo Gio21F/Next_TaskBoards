@@ -5,6 +5,6 @@ export interface IList {
     description: string;
     board: string;
     user: string;
-    createdAt?: string;
-    updatedAt?: string;
+    createdAt?: number;
+    // updatedAt?: string;
 }
