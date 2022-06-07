@@ -9,7 +9,7 @@ interface Props {
 
 export const Layout: FC<Props> = ({ title = 'OpenJira', children }) => {
   return (
-    <div className='w-full h-screen dark:bg-black text-white'>
+    <div className='w-full h-screen dark:bg-black bg-slate-200'>
       <Head>
         <title>{title}</title>
       </Head>

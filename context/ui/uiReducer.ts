@@ -6,6 +6,7 @@ type UIActionType =
    | { type: 'UI - Set isAddingEntry', payload: boolean }
    | { type: 'UI - Start Dragging' }
    | { type: 'UI - End Dragging' }
+   | { type: 'UI - Set Theme', payload: 'light' | 'dark' }
 
 
 export const uiReducer = ( state: UIState, action: UIActionType ): UIState => {
@@ -39,6 +40,11 @@ export const uiReducer = ( state: UIState, action: UIActionType ): UIState => {
          return {
             ...state,
             isDragging: false
+         }
+      case 'UI - Set Theme':
+         return {
+            ...state,
+            currentTheme: action.payload
          }
 
       default:

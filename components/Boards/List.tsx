@@ -10,10 +10,10 @@ interface Props {
 
 export const List = ({ list }:Props) => {
   return (
-    <div style={{ minWidth: 280 }} className='h-full p-5 border-2 border-indigo-500/70 rounded-lg'>
+    <div style={{ minWidth: 280 }} className='h-full p-5 border-2 border-indigo-500/70 rounded-lg text-black dark:text-white'>
       <div className='flex justify-between'>
         <h1 className='text-xl font-semibold mb-1'> { list.title } </h1>
-        <button className='text-white bg-transparent'>
+        <button className='bg-transparent'>
           <BiDotsVerticalRounded className='h-8 w-8' />
         </button>
       </div>

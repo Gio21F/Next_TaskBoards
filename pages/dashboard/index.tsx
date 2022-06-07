@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next'
 import { Layout } from '../../components/layouts';
 import { ContainerBoards } from '../../components/Boards';
 import { getSession } from 'next-auth/react';
-import { IBoard } from '../../interfaces';
 
 const PageDashboard = () => {
   return (

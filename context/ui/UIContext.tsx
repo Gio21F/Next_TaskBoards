@@ -5,6 +5,7 @@ interface ContextProps {
     sidemenuOpen: boolean;
     isAddingEntry: boolean;
     isDragging: boolean;
+    currentTheme: 'dark' | 'light';
 
     // Methods
     closeSideMenu: () => void;
@@ -14,6 +15,8 @@ interface ContextProps {
 
     endDragging: () => void;
     startDragging: () => void;
+
+    changeCurrentTheme: (newTheme: 'dark' | 'light') => Promise<{ hasError: boolean, message?: string }>;
 }
 
 

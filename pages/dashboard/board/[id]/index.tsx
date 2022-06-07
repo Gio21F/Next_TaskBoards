@@ -19,6 +19,7 @@ const BoardPage = () => {
     const { boards, lists, createList } = useContext( BoardsContext )
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
     const board = boards.find( board => board._id === id )
+
     const listsByBoards = useMemo( () => lists.filter( list => list.board === id ), [ lists, id ] )
 
     const handleCreateList = async( { title }:FormData ) => {
@@ -36,7 +37,7 @@ const BoardPage = () => {
     }
     return (
         <Layout title={ board?.title } >
-            <div className='w-full mb-5 flex sm:justify-between justify-center'>
+            <div className='w-full mb-5 flex sm:justify-between justify-center text-black dark:text-white'>
                 <h1 className='text-3xl font-bold hidden sm:inline mb-5'> { board?.title } </h1>
                 {/* Crear Lista */}
                 <div className='w-56 flex flex-col'>
@@ -52,7 +53,7 @@ const BoardPage = () => {
                             maxLength: { value: 30, message: 'Máximo 30 caracteres' }
                         })}
                     />
-                    <button className='ml-2 w-10 flex items-center place-content-center text-white rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
+                    <button className='ml-2 w-10 flex items-center place-content-center rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
                     </form>
                     { errors.title && <p className='text-red-500 mt-1'>{ errors.title.message }</p> }
                 </div>
@@ -64,7 +65,7 @@ const BoardPage = () => {
                 className="mt-2 w-full space-x-4 overflow-hidden flex overflow-x-scroll scrollbar-hide">
                 {
                     (listsByBoards.length > 0) 
-                        ? lists.map( (list:IList) => {
+                        ? listsByBoards.map( (list:IList) => {
                             return (
                                 <List list={list} key={ list._id } />
                             )

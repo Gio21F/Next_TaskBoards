@@ -4,9 +4,9 @@
 
 @layer components {
     .btn-board {
-      @apply w-52 h-20 m-2 rounded-lg flex items-center justify-center truncate border-2 
-      hover:border-indigo-500 transition ease-in-out delay-150 
+      @apply text-black w-52 h-20 m-2 rounded-lg flex items-center justify-center truncate border-2 
+      border-indigo-500 transition ease-in-out delay-150 
       hover:-translate-y-1 hover:scale-110 duration-150
-      dark:border-indigo-500/30 dark:bg-gray-900 
+      dark:border-indigo-500/30 dark:bg-gray-900 dark:text-white
     }
   }

@@ -33,7 +33,7 @@ export const ContainerBoards = () => {
   
   return (
     <>
-      <div className='w-full mb-5 flex sm:justify-between justify-center'>
+      <div className='w-full mb-5 flex sm:justify-between justify-center text-black dark:text-white'>
         <h1 className='text-3xl font-bold hidden sm:inline mb-5'> Tableros </h1>
         {/* Crear Tablero */}
         <div className='w-56 flex flex-col'>
@@ -49,7 +49,7 @@ export const ContainerBoards = () => {
                   maxLength: { value: 30, message: 'Máximo 30 caracteres' }
               })}
               />
-              <button className='ml-2 w-10 flex items-center place-content-center text-white rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
+              <button className='ml-2 w-10 flex items-center place-content-center text-black dark:text-white rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
             </form>
             { errors.title && <p className='text-red-500 mt-1'>{ errors.title.message }</p> }
           </div>

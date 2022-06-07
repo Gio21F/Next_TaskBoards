@@ -26,7 +26,7 @@ export const NewEntry = ({ status }:Props) => {
         reset()
     }
     return (
-        <div className='w-full py-2 flex flex-col bottom-2 mt-2'>
+        <div className='w-full py-2 flex flex-col bottom-2 mt-2 text-black dark:text-white'>
             <form className='flex' onSubmit={ handleSubmit( handleCreateEntry ) } noValidate>
                 <input 
                     className='rounded-lg p-2 bg-transparent 
@@ -39,7 +39,7 @@ export const NewEntry = ({ status }:Props) => {
                         minLength: { value: 4, message: 'Mínimo 4 caracteres' }
                     })}
                 />
-                <button className='ml-2 text-white rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-8 w-8' /></button>
+                <button className='ml-2 rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-8 w-8' /></button>
             </form>
             { errors.title && <p className='text-red-500 mt-1'>{ errors.title.message }</p> }
         </div>
