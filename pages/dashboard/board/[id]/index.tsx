@@ -42,18 +42,18 @@ const BoardPage = () => {
                 {/* Crear Lista */}
                 <div className='w-56 flex flex-col'>
                     <form className='flex' onSubmit={ handleSubmit( handleCreateList ) } noValidate>
-                    <input 
-                        type="text" 
-                        className='w-full bg-transparent rounded-xl p-2 border-2 
-                        font-semibold border-indigo-500/40 caret-indigo-500/50'  
-                        placeholder='Nuevo Lista de tareas'
-                        { ...register('title', {
-                            required: 'Este campo es requerido',
-                            minLength: { value: 4, message: 'Mínimo 2 caracteres' },
-                            maxLength: { value: 30, message: 'Máximo 30 caracteres' }
-                        })}
-                    />
-                    <button className='ml-2 w-10 flex items-center place-content-center rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
+                        <input 
+                            type="text" 
+                            className='w-full bg-transparent rounded-xl p-2 border-2 
+                            font-semibold border-indigo-500/40 caret-indigo-500/50'  
+                            placeholder='Nuevo Lista de tareas'
+                            { ...register('title', {
+                                required: 'Este campo es requerido',
+                                minLength: { value: 4, message: 'Mínimo 2 caracteres' },
+                                maxLength: { value: 30, message: 'Máximo 30 caracteres' }
+                            })}
+                        />
+                        <button className='ml-2 w-10 flex items-center place-content-center rounded-lg border-2 border-indigo-500/40'><BiPlus className='h-6 w-6' /></button>
                     </form>
                     { errors.title && <p className='text-red-500 mt-1'>{ errors.title.message }</p> }
                 </div>

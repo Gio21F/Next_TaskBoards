@@ -28,6 +28,7 @@ export const EntryCard = ({ entry }:Props) => {
             draggable
             onDragStart={ onDragStart }
             onDragEnd={ onDragEnd }
+            onClick={ () => router.push(`/dashboard/entries/${entry._id}`) }
         >
             <h1 className='w-full text-lg truncate'> { entry.title } </h1>
             <div className='flex place-content-end w-full'>

@@ -111,10 +111,10 @@ export const BoardsProvider: FC = ({ children }) => {
         }
     }
 
-    const updateEntry = async( { description, list, title, _id:id }:IEntry ): Promise<{hasError: boolean; message?: string}> => {
+    const updateEntry = async( { description, title, _id:id }:IEntry ): Promise<{hasError: boolean; message?: string}> => {
         const { _id } = user!
         try {
-            const { data } = await tasksApi.put<IEntry>( `/entries/${ _id }/${id}`, { title, description, list } );
+            const { data } = await tasksApi.put<IEntry>( `/entries/${ _id }/${id}`, { title, description } );
             dispatch( { type: '[Board] Entry-update', payload: data });
             return { hasError: false };
         } catch (error) {

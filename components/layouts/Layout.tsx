@@ -7,7 +7,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: FC<Props> = ({ title = 'OpenJira', children }) => {
+export const Layout: FC<Props> = ({ title = 'Tasks Boards', children }) => {
   return (
     <div className='w-full h-screen dark:bg-slate-900 bg-slate-200'>
       <Head>
