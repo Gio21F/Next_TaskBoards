@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
+import { getSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { BiSave, BiTrash } from 'react-icons/bi'
 import { toast } from 'react-toastify'
@@ -7,6 +8,7 @@ import { Layout } from '../../../../components/layouts'
 import { BoardsContext } from '../../../../context/boards'
 import { IEntry, IList } from '../../../../interfaces'
 import { optionsToast } from '../../../../utils'
+import { dbEntries } from '../../../../database'
 
 type FormData = {
     title: string
@@ -19,11 +21,7 @@ interface Props {
 }
 
 const EditTask = ({ task, list }:Props) => {
-    // const router = useRouter()
-    const { entries, lists, updateEntry } = useContext( BoardsContext )
-    // const { id } = router.query
-    // const task = useMemo( () => entries.find( entry => entry._id === id )!, [ entries, id ] )
-    // const list = useMemo( () => lists.find( list => list._id === task?.list ) , [ task, lists ] )
+    const { updateEntry } = useContext( BoardsContext )
     const [isSaving, setIsSaving] = useState(false);
 
     const { register, handleSubmit, formState:{ errors } } = useForm<FormData>({
@@ -43,7 +41,6 @@ const EditTask = ({ task, list }:Props) => {
         }
     }
 
-    // console.log(task)
     return (
         <Layout title={ task?.title }>
             <div className='dark:text-white/80 text-black'>
@@ -103,14 +100,6 @@ const EditTask = ({ task, list }:Props) => {
 }
 
 export default EditTask
-
-
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
-import { tasksApi } from '../../../../api'
-import { db, dbEntries } from '../../../../database'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     const session: any = await getSession({ req });
