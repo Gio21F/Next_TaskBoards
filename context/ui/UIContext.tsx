@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 
-interface ContextProps {
+interface ContextPropsUI {
     sidemenuOpen: boolean;
     isAddingEntry: boolean;
     isDragging: boolean;
@@ -20,4 +20,4 @@ interface ContextProps {
 }
 
 
-export const UIContext = createContext({} as ContextProps );
+export const UIContext = createContext({} as ContextPropsUI );

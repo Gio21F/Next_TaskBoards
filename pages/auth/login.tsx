@@ -2,10 +2,11 @@ import { GetServerSideProps } from 'next'
 import NextLink from 'next/link';
 import { getSession, signIn, getProviders } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthLayout } from '../../components/layouts';
 import { validations } from '../../utils';
+import { UIContext } from '../../context/ui';
 
 
 type FormData = {
@@ -14,6 +15,7 @@ type FormData = {
 };
 
 const Login = () => {
+    const { currentTheme, changeCurrentTheme } = useContext( UIContext )
     const router = useRouter();
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
@@ -34,12 +36,12 @@ const Login = () => {
     }
 
     return (
-        <AuthLayout title='Login'>
-            <div style={{ minWidth: 300, maxWidth: 450 }} className="flex flex-col text-white">
+        <AuthLayout title='Login' currentTheme={currentTheme} changeCurrentTheme={changeCurrentTheme}>
+            <div style={{ minWidth: 300, maxWidth: 450 }} className="flex flex-col text-black dark:text-white">
                 <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
-                    <div className='flex flex-col p-8 mt-20 space-y-4'>
+                    <div className='flex flex-col p-8 mt-20 space-y-6'>
 
-                        <p className='text-3xl font-bold mb-5'>Iniciar sessión</p>
+                        <p className='text-3xl font-bold mb-5 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Iniciar sessión</p>
 
                         <div style={{ display: showError ? 'flex' : 'none' }} className='w-full p-2 bg-red-500/80 rounded-lg'>
                             <p>No reconocemos ese usuario y/o contraseña</p>
@@ -48,7 +50,7 @@ const Login = () => {
                         <div className='font-semibold text-lg'>
                             <label htmlFor='email'>Email</label>
                             <input
-                                className='w-full p-2 rounded-md' 
+                                className='w-full p-2 rounded-md bg-transparent border-b-4 border-b-indigo-600' 
                                 type="email" 
                                 { ...register('email', {
                                     required: 'Este campo es requerido',
@@ -60,7 +62,7 @@ const Login = () => {
                         <div className='font-semibold text-lg'>
                             <label htmlFor='password'>Password</label>
                             <input 
-                                className='w-full p-2 rounded-md text-black' 
+                                className='w-full p-2 rounded-md bg-transparent border-b-4 border-b-indigo-600' 
                                 type="password" 
                                 { ...register('password', {
                                     required: 'Este campo es requerido',
@@ -69,15 +71,15 @@ const Login = () => {
                             />
                             { errors.password && <p className='text-red-500'>{ errors.password.message }</p> }
                         </div>
-                        <button type="submit" className='w-full p-2 border-2 border-indigo-500/80 hover:bg-indigo-500 rounded-lg'>
-                                Ingresar
-                        </button>
                         <NextLink
                             href='/auth/register'
                             passHref
                         >
-                            <a className='w-full text-right text-gray-500 mt-2 text-sm hover:text-white hover:underline'>¿No tienes una cuenta?</a>
+                            <a className='w-full text-right mt-2 opacity-60 hover:opacity-100 hover:underline'>¿No tienes una cuenta?</a>
                         </NextLink>
+                        <button type="submit" className='w-full p-2 border-2 border-indigo-500/80 hover:bg-indigo-500 rounded-lg hover:text-white'>
+                                Ingresar
+                        </button>
                         
                     </div>
                 </form>
@@ -91,7 +93,7 @@ const Login = () => {
                                     <button
                                         key={provider.id}
                                         onClick={() => signIn(provider.id, { callbackUrl: '/dashboard' })}
-                                        className='w-full p-2 border-2 border-indigo-500/80 hover:bg-indigo-500 rounded-lg'
+                                        className='w-full p-2 border-2 border-indigo-500/80 hover:bg-indigo-500 rounded-lg hover:text-white'
                                     >
                                         { provider.name }
                                     </button>

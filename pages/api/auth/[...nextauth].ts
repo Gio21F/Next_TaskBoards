@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
 import { dbUsers } from "../../../database"
+import { IUser } from "../../../interfaces"
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -58,8 +59,8 @@ export default NextAuth({
             return token
         },
         async session({ session, token, user }) {
-            session.accessToken = token.accessToken
-            session.user = token.user as any
+            session.accessToken = token.accessToken as string
+            session.user = token.user as IUser
             return session
         }
     }

@@ -54,8 +54,12 @@ export const BoardsProvider: FC = ({ children }) => {
     }
 
     const getBoardsByUser = async(_id:string) => {
-        const { data } = await tasksApi.get<IBoard[]>( `/boards/${ _id }` );
-        dispatch( { type: '[Board] Boards-get', payload: data });
+        try {
+            const { data } = await tasksApi.get<IBoard[]>( `/boards/${ _id }` );
+            dispatch( { type: '[Board] Boards-get', payload: data });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // Functions Lists
@@ -111,10 +115,10 @@ export const BoardsProvider: FC = ({ children }) => {
         }
     }
 
-    const updateEntry = async( { description, title, _id:id }:IEntry ): Promise<{hasError: boolean; message?: string}> => {
+    const updateEntry = async( { description, title, _id:id, list }:IEntry ): Promise<{hasError: boolean; message?: string}> => {
         const { _id } = user!
         try {
-            const { data } = await tasksApi.put<IEntry>( `/entries/${ _id }/${id}`, { title, description } );
+            const { data } = await tasksApi.put<IEntry>( `/entries/${ _id }/${id}`, { title, description, list } );
             dispatch( { type: '[Board] Entry-update', payload: data });
             return { hasError: false };
         } catch (error) {

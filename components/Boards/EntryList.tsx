@@ -20,16 +20,21 @@ export const EntryList = ({ status }:Props) => {
     }
 
     const onDropEntry = async( event: DragEvent<HTMLDivElement> ) => {
+        // console.log( 'Soltar entrada aqui', status );
         const id = event.dataTransfer.getData('text');
         const entry = entries.find( entry => entry._id === id );
         if ( entry ) {
+            // console.log( 'Entrada encontrada' );
             entry.list = status;
+            // console.log( 'Atualizando entrada a ', console.table( entry ) );
             const { hasError, message } = await updateEntry( entry );
+            // console.log( 'Returns', hasError, message );
             if (hasError) {
                 toast.error(message, optionsToast)
             }
             return endDragging();
         }
+        // console.log( 'Entrada no encontrada' );
         endDragging();
     }
     return (

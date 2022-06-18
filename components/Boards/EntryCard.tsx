@@ -16,15 +16,17 @@ export const EntryCard = ({ entry }:Props) => {
     const onDragStart = ( event: DragEvent ) => {
         event.dataTransfer.setData('text', entry._id! );
         startDragging();
+        // console.log("Iniciando arrasto");
     }
 
     const onDragEnd = () => {
+        // console.log("Finalizando arrasto");
         endDragging();
     }
     return (
         <div
             className='overflow-hidden flex items-center flex-col justify-center
-                cursor-pointer h-[80px] p-2 bg-zinc-400 dark:bg-zinc-700 rounded-md space-y-1'
+                cursor-pointer h-[80px] p-2 bg-slate-300 dark:bg-slate-800 rounded-md space-y-1'
             draggable
             onDragStart={ onDragStart }
             onDragEnd={ onDragEnd }

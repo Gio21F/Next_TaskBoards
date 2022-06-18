@@ -17,13 +17,14 @@ export const checkUserEmailPassword = async( email: string, password: string ) =
         return null;
     }
 
-    const { role, name, _id } = user;
+    const { role, name, _id, image } = user;
 
     return {
         _id,
         email: email.toLocaleLowerCase(),
         role,
         name,
+        image
     }
 }
 
@@ -35,8 +36,8 @@ export const oAUthToDbUser = async( oAuthEmail: string, oAuthName: string, oauth
 
     if ( user ) {
         await db.disconnect();
-        const { _id, name, email, role } = user;
-        return { _id, name, email, role };
+        const { _id, name, email, role, image } = user;
+        return { _id, name, email, role, image };
     }
 
     const newUser = new User({ email: oAuthEmail, name: oAuthName, password: '@', role: 'user', image: oauthImage });

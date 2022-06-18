@@ -21,7 +21,7 @@ export const authReducer = ( state: AuthState, action: AuthActionType ): AuthSta
             return {
                 ...state,
                 isLoggedIn: false,
-                user: undefined,
+                user: null,
             }
 
 

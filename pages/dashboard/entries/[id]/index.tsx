@@ -39,23 +39,22 @@ const EditTask = ({ task, list }:Props) => {
             setIsSaving(false)
             toast.error("Algo salio mal, intentelo mas tarde", optionsToast)
         }
+        setIsSaving(false)
     }
 
     return (
         <Layout title={ task?.title }>
-            <div className='dark:text-white/80 text-black'>
-
-                <h1 className='text-2xl font-semibold'>Editando tarea desde la lista { list?.title }</h1>
-                <button 
-                    className='absolute bottom-4 right-4 rounded-full 
-                    w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center bg-red-500'
-                    title='Eliminar tarea'
-                >
-                    <BiTrash className='h-6 w-6' />
-                </button>
-
-                <div className='flex w-full justify-center items-center mt-12'>
-                    <form onSubmit={ handleSubmit( onSubmit ) } className='flex flex-col space-y-4 w-[310px] sm:w-[450px] md:w-[500px] h-full '>
+            <div className='w-full flex items-center justify-center'>
+                <div className='flex flex-col min-w-[300px] max-w-[700px] justify-center items-center mt-12 dark:text-white/80 text-black  py-2 rounded-md'>
+                    <h1 className='text-2xl px-4 font-semibold w-full'>Editando tarea desde la lista { list?.title }</h1>
+                    <button 
+                        className='absolute bottom-4 right-4 rounded-full 
+                        w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center bg-red-500'
+                        title='Eliminar tarea'
+                    >
+                        <BiTrash className='h-6 w-6' />
+                    </button>
+                    <form onSubmit={ handleSubmit( onSubmit ) } className='w-full flex flex-col mt-12 space-y-4 h-full px-4'>
                         <label className='font-semibold'>Titulo de la tarea</label>
                         <input 
                             type="text" 
@@ -73,22 +72,23 @@ const EditTask = ({ task, list }:Props) => {
                             className='w-full bg-transparent rounded-xl p-2 border-2 
                             font-semibold border-indigo-500/40 caret-indigo-500/50'
                             placeholder='Descripción de la tarea'
-                            rows={ 15 }
+                            rows={ 5 }
                             maxLength={ 1000 }
                             { ...register('description', {
                                 required: 'Este campo es requerido',
                                 maxLength: { value: 1000, message: 'Máximo 1000 caracteres' },
-                                minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                                minLength: { value: 2, message: 'Mínimo 2 caracteres' },
                             })}
                         >
 
                         </textarea>
                         <button 
                             className='absolute bottom-4 right-24 rounded-full 
-                            w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center bg-green-500'
+                            w-10 h-10 sm:w-14 disabled:opacity-70 sm:h-14 flex items-center justify-center bg-green-500'
                             title='Guardar'
                             type="submit"
                             disabled={ isSaving }
+                            
                             >
                             <BiSave className='h-6 w-6' />
                         </button>

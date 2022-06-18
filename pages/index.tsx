@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className='w-full h-screen bg-white/75 dark:bg-black'>
+    <div className='w-full h-screen bg-slate-200 dark:bg-slate-900'>
       <Loading status={ status } />
     </div>
   )
